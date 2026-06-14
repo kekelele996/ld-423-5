@@ -14,6 +14,7 @@ export const Workspace = () => {
   const addDataset = useDatasetStore((state) => state.addDataset);
   const selectDataset = useDatasetStore((state) => state.selectDataset);
   const updateColumnType = useDatasetStore((state) => state.updateColumnType);
+  const updateColumnMeta = useDatasetStore((state) => state.updateColumnMeta);
   const dataset = datasets.find((candidate) => candidate.id === selectedDatasetId);
 
   useEffect(() => {
@@ -55,14 +56,32 @@ export const Workspace = () => {
           <section className="data-panel">
             <div className="column-editor">
               {dataset.columns.map((column) => (
-                <label key={column.name}>
-                  <span>{column.name}</span>
-                  <select value={column.type} onChange={(event) => updateColumnType(dataset.id, column.name, event.target.value as DataType)}>
-                    {Object.values(DataType).map((type) => (
-                      <option key={type} value={type}>{type}</option>
-                    ))}
-                  </select>
-                </label>
+                <div key={column.name} className="column-card">
+                  <label>
+                    <span>{column.name}</span>
+                    <select value={column.type} onChange={(event) => updateColumnType(dataset.id, column.name, event.target.value as DataType)}>
+                      {Object.values(DataType).map((type) => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    <span>备注</span>
+                    <input
+                      placeholder="字段含义说明"
+                      value={column.remark ?? ''}
+                      onChange={(event) => updateColumnMeta(dataset.id, column.name, { remark: event.target.value })}
+                    />
+                  </label>
+                  <label>
+                    <span>单位</span>
+                    <input
+                      placeholder="如 mg/L、°C"
+                      value={column.unit ?? ''}
+                      onChange={(event) => updateColumnMeta(dataset.id, column.name, { unit: event.target.value })}
+                    />
+                  </label>
+                </div>
               ))}
             </div>
             <DataGrid rows={dataset.data} columns={dataset.columns} />

@@ -12,6 +12,7 @@ interface DataGridProps {
 export const DataGrid = ({ rows, columns, maxHeight = 420 }: DataGridProps) => {
   const columnDefs: ColDef[] = columns.map((column) => ({
     field: column.name,
+    headerName: column.unit ? `${column.name}（${column.unit}）` : column.name,
     sortable: true,
     filter: column.type === DataType.Number ? 'agNumberColumnFilter' : true,
     resizable: true,

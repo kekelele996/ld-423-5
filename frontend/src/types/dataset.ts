@@ -3,6 +3,8 @@ import { DataType } from './enums';
 export interface ColumnDefinition {
   name: string;
   type: DataType;
+  remark?: string;
+  unit?: string;
 }
 
 export type DatasetRow = Record<string, string | number | boolean | null>;

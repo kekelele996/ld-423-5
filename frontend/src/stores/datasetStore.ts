@@ -10,6 +10,7 @@ interface DatasetState {
   addDataset: (dataset: Dataset) => Promise<void>;
   selectDataset: (datasetId: string) => void;
   updateColumnType: (datasetId: string, columnName: string, type: Dataset['columns'][number]['type']) => Promise<void>;
+  updateColumnMeta: (datasetId: string, columnName: string, meta: { remark?: string; unit?: string }) => Promise<void>;
 }
 
 export const useDatasetStore = create<DatasetState>((set, get) => ({
@@ -32,6 +33,16 @@ export const useDatasetStore = create<DatasetState>((set, get) => ({
     const datasets = get().datasets.map((dataset) =>
       dataset.id === datasetId
         ? { ...dataset, columns: dataset.columns.map((column) => (column.name === columnName ? { ...column, type } : column)) }
+        : dataset,
+    );
+    const updated = datasets.find((dataset) => dataset.id === datasetId);
+    if (updated) await db.datasets.put(updated);
+    set({ datasets });
+  },
+  updateColumnMeta: async (datasetId, columnName, meta) => {
+    const datasets = get().datasets.map((dataset) =>
+      dataset.id === datasetId
+        ? { ...dataset, columns: dataset.columns.map((column) => (column.name === columnName ? { ...column, ...meta } : column)) }
         : dataset,
     );
     const updated = datasets.find((dataset) => dataset.id === datasetId);

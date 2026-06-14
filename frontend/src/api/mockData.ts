@@ -10,11 +10,11 @@ export const sampleDataset: Dataset = {
   rowCount: 8,
   columnCount: 5,
   columns: [
-    { name: 'day', type: DataType.Number },
-    { name: 'temperature', type: DataType.Number },
-    { name: 'od600', type: DataType.Number },
-    { name: 'yield', type: DataType.Number },
-    { name: 'group', type: DataType.String },
+    { name: 'day', type: DataType.Number, remark: '培养天数', unit: 'd' },
+    { name: 'temperature', type: DataType.Number, remark: '培养温度', unit: '°C' },
+    { name: 'od600', type: DataType.Number, remark: '菌液光密度', unit: 'OD' },
+    { name: 'yield', type: DataType.Number, remark: '产物表达量', unit: 'mg/L' },
+    { name: 'group', type: DataType.String, remark: '实验分组' },
   ],
   tags: ['demo', 'cell'],
   data: [

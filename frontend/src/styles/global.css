@@ -24,7 +24,10 @@ h2, h3 { margin: 0; }
 .dataset-list .is-active { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
 .file-button input { display: none; }
 .column-editor, .stats-grid, .gallery-grid { display: grid; gap: 14px; }
-.column-editor { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 18px; }
+.column-editor { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 18px; }
+.column-card { display: grid; gap: 7px; border: 1px solid var(--line); padding: 12px; background: var(--surface); }
+.column-card label { display: grid; gap: 4px; color: var(--muted); font-size: .8rem; }
+.column-card label span { font-weight: 600; }
 .column-editor label, .field-control { display: grid; gap: 7px; color: var(--muted); }
 input, select { width: 100%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 10px; }
 .data-grid, .chart-preview, .gallery-item, .stat-card, .report-tile, .empty-state, .error-box { border: 1px solid var(--line); background: var(--surface-raised); }
